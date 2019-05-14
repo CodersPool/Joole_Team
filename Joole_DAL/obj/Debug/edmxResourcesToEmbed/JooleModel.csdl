@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Joole_DAL" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tblCategory">
+    <Key>
+      <PropertyRef Name="CategoryID" />
+    </Key>
+    <Property Name="CategoryID" Type="Int32" Nullable="false" />
+    <Property Name="CategoryName" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="tblSubCategories" Relationship="Self.FK__tblSubCat__Categ__59063A47" FromRole="tblCategory" ToRole="tblSubCategory" />
+  </EntityType>
+  <EntityType Name="tblManufacturer">
+    <Key>
+      <PropertyRef Name="ManufacturerID" />
+    </Key>
+    <Property Name="ManufacturerID" Type="Int32" Nullable="false" />
+    <Property Name="ManufacturerName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Website" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PhoneNumber" Type="Decimal" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="tblProducts" Relationship="Self.FK__tblProduc__Manuf__571DF1D5" FromRole="tblManufacturer" ToRole="tblProducts" />
+  </EntityType>
+  <EntityType Name="tblProduct">
+    <Key>
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="ProductID" Type="Int32" Nullable="false" />
+    <Property Name="ProductName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Series" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Model" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="ModelYear" Type="Int32" Nullable="false" />
+    <Property Name="SubCategoryID" Type="Int32" Nullable="false" />
+    <Property Name="ManufacturerID" Type="Int32" />
+    <Property Name="ProductImagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tblManufacturer" Relationship="Self.FK__tblProduc__Manuf__571DF1D5" FromRole="tblProducts" ToRole="tblManufacturer" />
+    <NavigationProperty Name="tblSubCategory" Relationship="Self.FK__tblProduc__SubCa__5812160E" FromRole="tblProducts" ToRole="tblSubCategory" />
+    <NavigationProperty Name="tblTypes" Relationship="Self.FK__tblType__Product__59FA5E80" FromRole="tblProducts" ToRole="tblType" />
+  </EntityType>
+  <EntityType Name="tblSubCategory">
+    <Key>
+      <PropertyRef Name="SubCategoryID" />
+    </Key>
+    <Property Name="SubCategoryID" Type="Int32" Nullable="false" />
+    <Property Name="SubCategoryName" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CategoryID" Type="Int32" />
+    <NavigationProperty Name="tblCategory" Relationship="Self.FK__tblSubCat__Categ__59063A47" FromRole="tblSubCategory" ToRole="tblCategory" />
+    <NavigationProperty Name="tblProducts" Relationship="Self.FK__tblProduc__SubCa__5812160E" FromRole="tblSubCategory" ToRole="tblProducts" />
+  </EntityType>
+  <EntityType Name="tblType">
+    <Key>
+      <PropertyRef Name="TypeID" />
+    </Key>
+    <Property Name="TypeID" Type="Int32" Nullable="false" />
+    <Property Name="TypeName" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IsTOption" Type="Boolean" Nullable="false" />
+    <Property Name="ProductID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tblProduct" Relationship="Self.FK__tblType__Product__59FA5E80" FromRole="tblType" ToRole="tblProducts" />
+    <NavigationProperty Name="tblTypeOptValues" Relationship="Self.FK__tblTypeOp__TypeI__5AEE82B9" FromRole="tblType" ToRole="tblTypeOptValue" />
+    <NavigationProperty Name="tblTypeSpecValues" Relationship="Self.FK__tblTypeSp__TypeI__5BE2A6F2" FromRole="tblType" ToRole="tblTypeSpecValue" />
+  </EntityType>
+  <EntityType Name="tblTypeOptValue">
+    <Key>
+      <PropertyRef Name="TypeOptID" />
+    </Key>
+    <Property Name="TypeOptID" Type="Int32" Nullable="false" />
+    <Property Name="Opt" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TypeID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tblType" Relationship="Self.FK__tblTypeOp__TypeI__5AEE82B9" FromRole="tblTypeOptValue" ToRole="tblType" />
+  </EntityType>
+  <EntityType Name="tblTypeSpecValue">
+    <Key>
+      <PropertyRef Name="TypeSpecID" />
+    </Key>
+    <Property Name="TypeSpecID" Type="Int32" Nullable="false" />
+    <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TypeID" Type="Int32" Nullable="false" />
+    <Property Name="Range" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tblType" Relationship="Self.FK__tblTypeSp__TypeI__5BE2A6F2" FromRole="tblTypeSpecValue" ToRole="tblType" />
+  </EntityType>
+  <EntityType Name="tblUser">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ImagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK__tblSubCat__Categ__59063A47">
+    <End Role="tblCategory" Type="Self.tblCategory" Multiplicity="0..1" />
+    <End Role="tblSubCategory" Type="Self.tblSubCategory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCategory">
+        <PropertyRef Name="CategoryID" />
+      </Principal>
+      <Dependent Role="tblSubCategory">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblProduc__Manuf__571DF1D5">
+    <End Role="tblManufacturer" Type="Self.tblManufacturer" Multiplicity="0..1" />
+    <End Role="tblProducts" Type="Self.tblProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblManufacturer">
+        <PropertyRef Name="ManufacturerID" />
+      </Principal>
+      <Dependent Role="tblProducts">
+        <PropertyRef Name="ManufacturerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblProduc__SubCa__5812160E">
+    <End Role="tblSubCategory" Type="Self.tblSubCategory" Multiplicity="1" />
+    <End Role="tblProducts" Type="Self.tblProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblSubCategory">
+        <PropertyRef Name="SubCategoryID" />
+      </Principal>
+      <Dependent Role="tblProducts">
+        <PropertyRef Name="SubCategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblType__Product__59FA5E80">
+    <End Role="tblProducts" Type="Self.tblProduct" Multiplicity="1" />
+    <End Role="tblType" Type="Self.tblType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblProducts">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="tblType">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblTypeOp__TypeI__5AEE82B9">
+    <End Role="tblType" Type="Self.tblType" Multiplicity="1" />
+    <End Role="tblTypeOptValue" Type="Self.tblTypeOptValue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblType">
+        <PropertyRef Name="TypeID" />
+      </Principal>
+      <Dependent Role="tblTypeOptValue">
+        <PropertyRef Name="TypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblTypeSp__TypeI__5BE2A6F2">
+    <End Role="tblType" Type="Self.tblType" Multiplicity="1" />
+    <End Role="tblTypeSpecValue" Type="Self.tblTypeSpecValue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblType">
+        <PropertyRef Name="TypeID" />
+      </Principal>
+      <Dependent Role="tblTypeSpecValue">
+        <PropertyRef Name="TypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Joole_TeamEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tblCategories" EntityType="Self.tblCategory" />
+    <EntitySet Name="tblManufacturers" EntityType="Self.tblManufacturer" />
+    <EntitySet Name="tblProducts" EntityType="Self.tblProduct" />
+    <EntitySet Name="tblSubCategories" EntityType="Self.tblSubCategory" />
+    <EntitySet Name="tblTypes" EntityType="Self.tblType" />
+    <EntitySet Name="tblTypeOptValues" EntityType="Self.tblTypeOptValue" />
+    <EntitySet Name="tblTypeSpecValues" EntityType="Self.tblTypeSpecValue" />
+    <EntitySet Name="tblUsers" EntityType="Self.tblUser" />
+    <AssociationSet Name="FK__tblSubCat__Categ__59063A47" Association="Self.FK__tblSubCat__Categ__59063A47">
+      <End Role="tblCategory" EntitySet="tblCategories" />
+      <End Role="tblSubCategory" EntitySet="tblSubCategories" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblProduc__Manuf__571DF1D5" Association="Self.FK__tblProduc__Manuf__571DF1D5">
+      <End Role="tblManufacturer" EntitySet="tblManufacturers" />
+      <End Role="tblProducts" EntitySet="tblProducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblProduc__SubCa__5812160E" Association="Self.FK__tblProduc__SubCa__5812160E">
+      <End Role="tblSubCategory" EntitySet="tblSubCategories" />
+      <End Role="tblProducts" EntitySet="tblProducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblType__Product__59FA5E80" Association="Self.FK__tblType__Product__59FA5E80">
+      <End Role="tblProducts" EntitySet="tblProducts" />
+      <End Role="tblType" EntitySet="tblTypes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblTypeOp__TypeI__5AEE82B9" Association="Self.FK__tblTypeOp__TypeI__5AEE82B9">
+      <End Role="tblType" EntitySet="tblTypes" />
+      <End Role="tblTypeOptValue" EntitySet="tblTypeOptValues" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblTypeSp__TypeI__5BE2A6F2" Association="Self.FK__tblTypeSp__TypeI__5BE2A6F2">
+      <End Role="tblType" EntitySet="tblTypes" />
+      <End Role="tblTypeSpecValue" EntitySet="tblTypeSpecValues" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
