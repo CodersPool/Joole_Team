@@ -351,3 +351,7 @@ healthchecksdb
 MigrationBackup/
 
 /.vs/Joole
+/.vs/Joole/v15
+.vs/Joole/v15
+**/.vs/Joole/v15
+
