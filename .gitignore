@@ -350,4 +350,10 @@ healthchecksdb
 # Backup folder for Package Reference Convert tool in Visual Studio 2017
 MigrationBackup/
 
-/.vs/Joole_MVC_Team1
+/.vs/Joole
+
+/.vs/Joole/v15
+
+.vs/Joole/v15
+
+**/.vs/Joole/v15
