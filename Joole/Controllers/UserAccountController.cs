@@ -60,7 +60,7 @@ namespace Joole.Controllers
 
             if (service.SignUp(objUser)){
                     objUserModel.SuccessMessage = "Success...";
-                    return RedirectToAction("UserView", "Products", new { objUserModel = objUser.UserId });
+                    return RedirectToAction("Login", "UserAccount", new { objUserModel = objUser.UserId });
                 }
 
                 else {
