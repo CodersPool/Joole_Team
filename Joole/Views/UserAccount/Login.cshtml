@@ -1,0 +1,165 @@
+﻿@model Joole.Models.UserModel
+@{
+    ViewBag.Title = "Joole Home";
+}
+
+
+@using (Html.BeginForm("SignUp", "UserAccount", FormMethod.Post))
+{
+<div class="container">
+        <div class="row">
+            <div class="col-xs-10">
+
+                <a id="btnclick" href="#" class="nav navbar-nav navbar-right" style="color:black;">
+                    Sign Up
+                </a>
+
+                <div class="modal fade" id="signup">
+                    <div class="modal-dialog modal-su">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">
+                                    X
+                                </button>
+                                <h4 class="modal-title">Register as User</h4>
+                            </div>
+                            <div class="modal-body">
+                                <table>
+                                    <tr>
+                                        <td class="form-group">
+                                            @Html.LabelFor(model => model.User_Name)
+                                        </td>
+                                        <td class="form-group">
+                                            @Html.TextBoxFor(model => model.User_Name, new { @class = "form-control", placeholder = "Username" })
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>
+                                            @Html.ValidationMessageFor(model => model.User_Name, null, new { @class = "text text-danger" })
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="form-group">
+                                            @Html.LabelFor(model => model.User_Email)
+                                        </td>
+                                        <td class="form-group">
+                                            @Html.TextBoxFor(model => model.User_Email, new { @class = "form-control", placeholder = "Email address" })
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>
+                                            @Html.ValidationMessageFor(model => model.User_Email, null, new { @class = "text text-danger" })
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="form-group">
+                                            @Html.LabelFor(model => model.User_Password)
+                                        </td>
+                                        <td class="form-group">
+                                            @Html.PasswordFor(model => model.User_Password, new { @class = "form-control", placeholder = "Password" })
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>
+                                            @Html.ValidationMessageFor(model => model.User_Password, null, new { @class = "text text-danger" })
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="form-group">
+                                            @Html.LabelFor(model => model.ConfirmPassword)
+                                        </td>
+                                        <td class="form-group">
+                                            @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control", placeholder = "Password" })
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>
+                                            @Html.ValidationMessageFor(model => model.ConfirmPassword, null, new { @class = "text text-danger" })
+                                        </td>
+                                        <td>
+                                            <div class="modal-footer">
+                                                <table>
+                                                    <tr>
+                                                        <td>
+                                                            <input type="submit" class="btn btn-primary" value="Sign Up" />
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#btnclick").click(function () {
+                $("#signup").modal("show");
+            });
+
+            $("#HidebtnModal").click(function () {
+                $("#signup").modal('hide');
+            });
+        });
+    </script>
+}
+
+
+
+
+
+
+
+<!--Demacation between Login and SignUp-->
+
+<div style="text-align:center">
+    <div style="display: inline-block; margin: 350px 50px 100px 50px;">
+        <img src="~/Images/joole_logo_Login.png" />
+
+
+        @using (Html.BeginForm("Login", "UserAccount", FormMethod.Post))
+        {
+            <div class="form-group">
+
+                @Html.TextBoxFor(model => model.User_Name, new { @class = "form-control", placeholder = "Username" })
+                @Html.ValidationMessageFor(model => model.User_Name, null, new { @class = "text text-danger" })
+            </div>
+            <div class="form-group">
+
+                @Html.PasswordFor(model => model.User_Password, new { @class = "form-control", placeholder = "Password" })
+                @Html.ValidationMessageFor(model => model.User_Password, null, new { @class = "text text-danger" })
+            </div>
+            <button type="submit" class="btn btn-primary pull-right">Login</button>
+        }
+
+
+    </div>
+
+</div>
+
+
+<!--End of Login Form-->
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
+
+

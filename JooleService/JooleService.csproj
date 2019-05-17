@@ -51,6 +51,7 @@
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\SearchViewModel.cs" />
     <Compile Include="Models\SubCategory.cs" />
+    <Compile Include="ServiceM1.cs" />
     <Compile Include="ServiceM2.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
